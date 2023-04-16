@@ -59,14 +59,14 @@ const App = ({ signOut }) => {
   }
 
   async function deleteNote({ id, name }) {
-  const newNotes = notes.filter((note) => note.id !== id);
-  setNotes(newNotes);
-  await Storage.remove(name);
-  await API.graphql({
-    query: deleteNoteMutation,
-    variables: { input: { id } },
-  });
-} 
+      const newNotes = notes.filter((note) => note.id !== id);
+      setNotes(newNotes);
+      await Storage.remove(name);
+      await API.graphql({
+	  query: deleteNoteMutation,
+	  variables: { input: { id } },
+      });
+  } 
 
   return (
     <View className="App">
@@ -124,24 +124,9 @@ const App = ({ signOut }) => {
 		   Delete note
 	       </Button>
 	   </Flex>
-       ))} {notes.map((note) => (
-          <Flex
-            key={note.id || note.name}
-            direction="row"
-            justifyContent="center"
-            alignItems="center"
-          >
-            <Text as="strong" fontWeight={700}>
-              {note.name}
-            </Text>
-            <Text as="span">{note.description}</Text>
-            <Button variation="link" onClick={() => deleteNote(note)}>
-              Delete note
-            </Button>
-          </Flex>
-        ))}
+       ))} 
       </View>
-      <Button onClick={signOut}>Sign Out</Button>
+	<Button onClick={signOut}>Sign Out</Button>
     </View>
   );
 };
